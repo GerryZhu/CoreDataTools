@@ -1,0 +1,2 @@
+# CoreDataTools
+对CoreData的一个简单封装，使用CoreData对普通的数据模型直接存储，工具内部完成NSObject与NSManagerObject的互转；一行代码完成数据的CoreData增删改查
