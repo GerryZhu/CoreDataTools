@@ -9,14 +9,14 @@
 #import "ViewController.h"
 #import "CoreDataTools.h"
 #import "FriendModel.h"
-#import "StuModel.h"
+#import "MessageModel.h"
 
 @interface ViewController ()
 {
     NSInteger _fetchOffset;//从第几条开始读取数据
 }
 
-@property (weak, nonatomic) IBOutlet UITextField *name;
+@property (weak, nonatomic) IBOutlet UITextField *imageUrl;
 @property (weak, nonatomic) IBOutlet UITextField *message;
 @property (weak, nonatomic) IBOutlet UITextField *messageId;
 @property (weak, nonatomic) IBOutlet UITextField *icon;
@@ -49,42 +49,46 @@
 - (IBAction)insertMessage:(id)sender
 {
     NSDictionary *dic = @{
-                          @"name":_name.text,
                           @"message":_message.text,
                           @"messageId":_messageId.text,
-                          @"icon":_icon.text,
-                          @"dict":@{@"1":@"张三",@"2":@"李四",@"3":@"王五",@"4":@"赵六"}
+                          @"imageUrl":_imageUrl.text,
+                          @"friendInfo":@{@"name":@"张三",@"nickName":@"nickName",@"iconUrl":@"https://12.10.1:8080/IconImage/1.png",@"userId":@"72u7937r6"}
                           };
     NSMutableArray *marr = [NSMutableArray arrayWithCapacity:10];
     for (int i = 0; i < 1000; i ++) {
         [marr addObject:dic];
     }
-    [[CoreDataTools shareTools] insertWithEntityName:@"FriendModel" dataArray:marr];
+    [[CoreDataTools shareTools] insertWithEntityName:@"MessageModel" dataArray:marr];
 }
 
 //删
 - (IBAction)deleteMessage:(id)sender
 {
-    [[CoreDataTools shareTools] deleteWithEntityName:@"FriendModel"];
+    [[CoreDataTools shareTools] deleteWithEntityName:@"MessageModel"];
 }
 
 //改
 - (IBAction)updateMessage:(id)sender
 {
     NSDictionary *dic = @{
-                          @"name":_name.text,
                           @"message":_message.text,
                           @"messageId":_messageId.text,
-                          @"icon":_icon.text
+                          @"imageUrl":_imageUrl.text,
+                          @"friendInfo":@{@"name":@"张三",@"nickName":@"nickName",@"iconUrl":@"https://12.10.1:8080/IconImage/1.png",@"userId":@"72u7937r6"}
                           };
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@",_name.text];
-    [[CoreDataTools shareTools] updateWithEntityName:@"FriendModel" predicate:predicate newData:@[dic]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId=%@",_messageId.text];
+    [[CoreDataTools shareTools] updateWithEntityName:@"MessageModel" predicate:predicate newData:@[dic]];
 }
 
 //查
 - (IBAction)seachMessage:(id)sender
 {
-    [[CoreDataTools shareTools] seachWithEntityName:@"FriendModel" predicate:nil fetchLimit:10 fetchOffset:_fetchOffset result:^(NSArray *array) {
+//    //关联表查询
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"friendInfo.name = %@",@"张三"];
+    
+    //查询条件
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"messageId = %@",self.messageId.text];
+    [[CoreDataTools shareTools] seachWithEntityName:@"MessageModel" predicate:predicate fetchLimit:10 fetchOffset:_fetchOffset result:^(NSArray *array) {
 //        NSLog(@"查询到的数据 array = %@",array);
         NSLog(@"%ld",array.count);
         
@@ -102,5 +106,11 @@
     [CoreDataTools deleteCoreData];
 }
 
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
 
 @end

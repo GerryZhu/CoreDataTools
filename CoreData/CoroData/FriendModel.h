@@ -11,10 +11,8 @@
 @interface FriendModel : BaseModel
 
 @property (nonatomic, copy)NSString *name;
-@property (nonatomic, copy)NSString *message;
-@property (nonatomic, copy)NSString *messageId;
-@property (nonatomic, copy)NSString *icon;
-@property (nonatomic, strong)NSDictionary *dict;
-
+@property (nonatomic, copy)NSString *nickName;
+@property (nonatomic, copy)NSString *iconUrl;
+@property (nonatomic, copy)NSString *userId;
 
 @end

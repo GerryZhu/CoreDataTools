@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataTools.h"
+#import "BaseModel.h"
 #import <objc/runtime.h>
 
 #define SQLitePath  [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/CoreData"]
@@ -79,34 +80,19 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark - 插入数据
+
 - (void)insertWithEntityName:(NSString *)entityName data:(id)data
 {
-    NSArray *dataArr = @[data];
-    if ([data isKindOfClass:[NSArray class]]) dataArr = data;
-    [self insertWithEntityName:entityName dataArray:dataArr];
+        NSArray *dataArr = @[data];
+        if ([data isKindOfClass:[NSArray class]]) dataArr = data;
+        [self insertWithEntityName:entityName dataArray:dataArr];
 }
 
 - (void)insertWithEntityName:(NSString *)entityName dataArray:(NSArray *)dataArray
 {
     [self.context performBlockAndWait:^{  //  同步操作， 队列中前面的任务执行完成后才执行此block
         [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSManagedObject *managedModel = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.context];
-            NSArray *propertyList = [managedModel getPropertyList];
-            [propertyList enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
-                SEL getKey = NSSelectorFromString(key);
-                NSObject *value = nil;
-                if ([obj isKindOfClass:[NSDictionary class]]) {
-                    value = obj[key];
-                } else if ([obj respondsToSelector:getKey]) {
-#pragma clang diagnostic push  
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"  
-                    value = [obj performSelector:getKey];
-#pragma clang diagnostic pop 
-                }
-                if (value != nil && ![value isKindOfClass:[NSNull class]]) {
-                    [managedModel setValue:value forKey:key];
-                }
-            }];
+            [self insertAnEntity:entityName data:obj];
             if (idx%200 == 199 || idx == dataArray.count-1) { //每200条数据保存一次，防止阻塞线程
                 NSError *error = nil;
                 [self.context save:&error];
@@ -119,6 +105,30 @@ static dispatch_once_t onceToken;
         }];
         NSLog(@"数据保存成功");
     }];
+}
+
+- (NSManagedObject *)insertAnEntity:(NSString *)entityName data:(id)data
+{   
+    if ([data isKindOfClass:[NSDictionary class]]) data = [NSClassFromString(entityName) modelWithDict:data];
+    NSManagedObject *managedModel = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.context];
+    NSArray *propertyList = [managedModel getPropertyList];
+    [propertyList enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+        SEL getKey = NSSelectorFromString(key);
+        NSObject *value = nil;
+        if ([data respondsToSelector:getKey]) {
+#pragma clang diagnostic push  
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"  
+            value = [data performSelector:getKey];
+#pragma clang diagnostic pop 
+            if ([value isKindOfClass:[BaseModel class]]) {
+                value = [self insertAnEntity:NSStringFromClass([value class]) data:value];
+            }
+        }
+        if (value != nil && ![value isKindOfClass:[NSNull class]]) {
+            [managedModel setValue:value forKey:key];
+        }
+    }];
+    return managedModel;
 }
 
 #pragma mark - 删除数据
@@ -146,7 +156,7 @@ static dispatch_once_t onceToken;
             [self.context undo];
             NSLog(@"删除错误 error: %@",error);
         }
-        NSLog(@"删除成功  error: %@",error);
+        NSLog(@"删除成功!");
     }];
 }
 
@@ -264,9 +274,11 @@ static dispatch_once_t onceToken;
     for (NSString *key in array) {
         SEL setKey = [self getSelFromAttributeString:key];
         if ([object respondsToSelector:setKey]) {
+            id value = [managerObject valueForKey:key];
+            if ([value isKindOfClass:[NSManagedObject class]]) value = [self managerObjectToObject:value];
 #pragma clang diagnostic push  
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"  
-            [object performSelector:setKey withObject:[managerObject valueForKey:key]];
+            [object performSelector:setKey withObject:value];
 #pragma clang diagnostic pop 
         }
     }

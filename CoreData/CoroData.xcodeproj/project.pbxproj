@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		924335E81D5B2B6300EAD896 /* StuModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 924335E71D5B2B6300EAD896 /* StuModel.m */; };
-		927CC3BD1E1DD3A1000B71FE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 927CC3BC1E1DD3A1000B71FE /* BaseModel.m */; };
+		92BE69001E655A07006E71FB /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BE68FF1E655A07006E71FB /* MessageModel.m */; };
+		92BE69061E6560E5006E71FB /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BE69031E6560E5006E71FB /* BaseModel.m */; };
+		92BE69071E6560E5006E71FB /* CoreDataTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 92BE69051E6560E5006E71FB /* CoreDataTools.m */; };
 		CEFDDBDE1C476DAD007287A1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDBDD1C476DAD007287A1 /* main.m */; };
 		CEFDDBE11C476DAD007287A1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDBE01C476DAD007287A1 /* AppDelegate.m */; };
 		CEFDDBE41C476DAD007287A1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDBE31C476DAD007287A1 /* ViewController.m */; };
@@ -19,7 +20,6 @@
 		CEFDDBFA1C476DAD007287A1 /* CoroDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDBF91C476DAD007287A1 /* CoroDataTests.m */; };
 		CEFDDC051C476DAD007287A1 /* CoroDataUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDC041C476DAD007287A1 /* CoroDataUITests.m */; };
 		CEFDDC131C4770F3007287A1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEFDDC121C4770F3007287A1 /* CoreData.framework */; };
-		CEFDDC191C4792CD007287A1 /* CoreDataTools.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDC181C4792CD007287A1 /* CoreDataTools.m */; };
 		CEFDDC221C47A419007287A1 /* FriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFDDC211C47A419007287A1 /* FriendModel.m */; };
 /* End PBXBuildFile section */
 
@@ -41,10 +41,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		924335E61D5B2B6300EAD896 /* StuModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StuModel.h; sourceTree = "<group>"; };
-		924335E71D5B2B6300EAD896 /* StuModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StuModel.m; sourceTree = "<group>"; };
-		927CC3BB1E1DD3A1000B71FE /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
-		927CC3BC1E1DD3A1000B71FE /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		92BE68FE1E655A07006E71FB /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		92BE68FF1E655A07006E71FB /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		92BE69021E6560E5006E71FB /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		92BE69031E6560E5006E71FB /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		92BE69041E6560E5006E71FB /* CoreDataTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTools.h; sourceTree = "<group>"; };
+		92BE69051E6560E5006E71FB /* CoreDataTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTools.m; sourceTree = "<group>"; };
 		CEFDDBD91C476DAD007287A1 /* CoroData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoroData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFDDBDD1C476DAD007287A1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEFDDBDF1C476DAD007287A1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,8 +65,6 @@
 		CEFDDC041C476DAD007287A1 /* CoroDataUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoroDataUITests.m; sourceTree = "<group>"; };
 		CEFDDC061C476DAD007287A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFDDC121C4770F3007287A1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		CEFDDC171C4792CD007287A1 /* CoreDataTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTools.h; sourceTree = "<group>"; };
-		CEFDDC181C4792CD007287A1 /* CoreDataTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTools.m; sourceTree = "<group>"; };
 		CEFDDC201C47A419007287A1 /* FriendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendModel.h; sourceTree = "<group>"; };
 		CEFDDC211C47A419007287A1 /* FriendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,6 +95,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92BE69011E6560E5006E71FB /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				92BE69021E6560E5006E71FB /* BaseModel.h */,
+				92BE69031E6560E5006E71FB /* BaseModel.m */,
+				92BE69041E6560E5006E71FB /* CoreDataTools.h */,
+				92BE69051E6560E5006E71FB /* CoreDataTools.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		CEFDDBD01C476DAD007287A1 = {
 			isa = PBXGroup;
 			children = (
@@ -119,18 +130,15 @@
 		CEFDDBDB1C476DAD007287A1 /* CoroData */ = {
 			isa = PBXGroup;
 			children = (
+				92BE69011E6560E5006E71FB /* Tools */,
 				CEFDDBDF1C476DAD007287A1 /* AppDelegate.h */,
 				CEFDDBE01C476DAD007287A1 /* AppDelegate.m */,
 				CEFDDBE21C476DAD007287A1 /* ViewController.h */,
 				CEFDDBE31C476DAD007287A1 /* ViewController.m */,
-				927CC3BB1E1DD3A1000B71FE /* BaseModel.h */,
-				927CC3BC1E1DD3A1000B71FE /* BaseModel.m */,
-				924335E61D5B2B6300EAD896 /* StuModel.h */,
-				924335E71D5B2B6300EAD896 /* StuModel.m */,
 				CEFDDC201C47A419007287A1 /* FriendModel.h */,
 				CEFDDC211C47A419007287A1 /* FriendModel.m */,
-				CEFDDC171C4792CD007287A1 /* CoreDataTools.h */,
-				CEFDDC181C4792CD007287A1 /* CoreDataTools.m */,
+				92BE68FE1E655A07006E71FB /* MessageModel.h */,
+				92BE68FF1E655A07006E71FB /* MessageModel.m */,
 				CEFDDBE51C476DAD007287A1 /* Main.storyboard */,
 				CEFDDBEB1C476DAD007287A1 /* Assets.xcassets */,
 				CEFDDBED1C476DAD007287A1 /* LaunchScreen.storyboard */,
@@ -299,12 +307,12 @@
 			files = (
 				CEFDDBE41C476DAD007287A1 /* ViewController.m in Sources */,
 				CEFDDC221C47A419007287A1 /* FriendModel.m in Sources */,
-				927CC3BD1E1DD3A1000B71FE /* BaseModel.m in Sources */,
-				924335E81D5B2B6300EAD896 /* StuModel.m in Sources */,
 				CEFDDBE11C476DAD007287A1 /* AppDelegate.m in Sources */,
+				92BE69061E6560E5006E71FB /* BaseModel.m in Sources */,
 				CEFDDBEA1C476DAD007287A1 /* CoroData.xcdatamodeld in Sources */,
-				CEFDDC191C4792CD007287A1 /* CoreDataTools.m in Sources */,
 				CEFDDBDE1C476DAD007287A1 /* main.m in Sources */,
+				92BE69071E6560E5006E71FB /* CoreDataTools.m in Sources */,
+				92BE69001E655A07006E71FB /* MessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
