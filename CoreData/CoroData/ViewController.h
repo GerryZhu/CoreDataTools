@@ -1,9 +1,9 @@
 //
 //  ViewController.h
-//  CoreDataTools
+//  CoroData
 //
-//  Created by elion on 17/2/28.
-//  Copyright © 2017年 elion. All rights reserved.
+//  Created by ZXW on 17/1/14.
+//  Copyright © 2017年 xuewei. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
