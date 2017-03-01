@@ -90,10 +90,10 @@ static dispatch_once_t onceToken;
 
 - (void)insertWithEntityName:(NSString *)entityName dataArray:(NSArray *)dataArray
 {
-    [self.context performBlockAndWait:^{  //  同步操作， 队列中前面的任务执行完成后才执行此block
+    [self.context performBlockAndWait:^{
         [dataArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [self insertAnEntity:entityName data:obj];
-            if (idx%200 == 199 || idx == dataArray.count-1) { //每200条数据保存一次，防止阻塞线程
+            if (idx%200 == 199 || idx == dataArray.count-1) { 
                 NSError *error = nil;
                 [self.context save:&error];
                 if (error != nil) {
@@ -217,11 +217,9 @@ static dispatch_once_t onceToken;
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName];
         if (predicate != nil) request.predicate = predicate;
         if (key) {
-            //以key进行排序 ascending  为YES时升序, 为NO时降序
             NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:key ascending:ascending];
             request.sortDescriptors = @[sort];
         }
-        //查找 fetchLimit 条数据,从第 _fetchOffset 条开始查找;
         if (fetchLimit > 0) request.fetchLimit = fetchLimit;
         if (fetchOffset > 0) request.fetchOffset = fetchOffset;
         
